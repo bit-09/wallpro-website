@@ -3,28 +3,24 @@
 @tailwind utilities;
 
 :root {
---background: #050505;
---foreground: #f5f5f5;
---accent-blue: #00a4a6;
+  --background: #030303;
+  --accent: #00a4a6;
 }
 
 body {
-background-color: var(--background);
-color: var(--foreground);
-overflow-x: hidden;
-scroll-behavior: smooth;
+  background-color: var(--background);
+  color: #ededed;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar {
-width: 6px;
+/* Luxury Grain Effect */
+.bg-grain {
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
 }
-::-webkit-scrollbar-track {
-background: #0a0a0a;
-}
-::-webkit-scrollbar-thumb {
-background: #222;
-border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-background: var(--accent-blue);
-}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #030303; }
+::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }

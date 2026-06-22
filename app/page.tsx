@@ -1,9 +1,28 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Printer, Shield, Zap, Mail, MapPin } from 'lucide-react';
 
 export default function Home() {
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: any) {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.target);
+    
+    await fetch("https://formspree.io/f/mbdvjaeo", {
+      method: "POST",
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    setLoading(false);
+    setSubmitted(true);
+  }
+
   return (
     <main className="min-h-screen bg-[#050505] selection:bg-[#00a4a6] selection:text-white">
       
@@ -50,9 +69,7 @@ export default function Home() {
             <p className="text-zinc-500 text-sm md:text-base">Premium, durable architectural print execution tailored for India's top spaces.</p>
           </div>
 
-          {/* Grid Layout Fixed */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-            {/* Feature 1 */}
             <div className="flex flex-col items-start p-8 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-[#00a4a6]/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-xl bg-[#00a4a6]/10 flex items-center justify-center text-[#00a4a6] mb-6">
                 <Printer size={24} />
@@ -63,7 +80,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Feature 2 */}
             <div className="flex flex-col items-start p-8 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-[#00a4a6]/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-xl bg-[#00a4a6]/10 flex items-center justify-center text-[#00a4a6] mb-6">
                 <Zap size={24} />
@@ -74,7 +90,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Feature 3 */}
             <div className="flex flex-col items-start p-8 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-[#00a4a6]/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-xl bg-[#00a4a6]/10 flex items-center justify-center text-[#00a4a6] mb-6">
                 <Shield size={24} />
@@ -88,15 +103,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. CONTACT & LEAD GENERATION SECTION */}
+      {/* 4. CONTACT SECTION */}
       <section id="contact" className="py-24 border-t border-zinc-900 relative">
         <div className="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-16">
-          
-          {/* Brand & Contact Info */}
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Let's Collaborate on Your Walls</h2>
             <p className="text-gray-400 mb-8 leading-relaxed text-sm md:text-base">
-              We partner with forward-thinking architects, premium interior designers, and commercial builders to execute next-level feature installations across commercial and high-end residential real estate.
+              We partner with forward-thinking architects, premium interior designers, and commercial builders to execute next-level feature installations.
             </p>
             
             <div className="space-y-4">
@@ -111,35 +124,38 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Lead Form Wrapper Fixed */}
           <div className="w-full">
-            <form className="p-8 rounded-2xl bg-zinc-900/30 border border-white/5 space-y-5 w-full" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Full Name</label>
-                <input type="text" className="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00a4a6] transition-all text-sm" placeholder="Enter your name" />
+            {submitted ? (
+              <div className="p-8 rounded-2xl bg-[#00a4a6]/10 border border-[#00a4a6]/30 text-center">
+                <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+                <p className="text-gray-300">Thank you. We will contact you regarding your project shortly.</p>
               </div>
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
-                <input type="email" className="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00a4a6] transition-all text-sm" placeholder="name@company.com" />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Project Requirements</label>
-                <textarea rows={4} className="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00a4a6] transition-all text-sm resize-none" placeholder="Describe the dimensions, surface material, and your layout idea..."></textarea>
-              </div>
-              <button type="submit" className="w-full bg-[#00a4a6] text-white font-semibold py-3.5 rounded-lg hover:bg-[#008f91] transition-all duration-300 text-sm shadow-lg shadow-[#00a4a6]/10">
-                Request Free Site Survey
-              </button>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-zinc-900/30 border border-white/5 space-y-5 w-full">
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Full Name</label>
+                  <input type="text" name="name" required className="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00a4a6]" placeholder="Enter your name" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+                  <input type="email" name="email" required className="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00a4a6]" placeholder="name@company.com" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Project Requirements</label>
+                  <textarea name="message" required rows={4} className="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00a4a6] resize-none" placeholder="Describe the dimensions, surface material, and your layout idea..."></textarea>
+                </div>
+                <button type="submit" disabled={loading} className="w-full bg-[#00a4a6] text-white font-semibold py-3.5 rounded-lg hover:bg-[#008f91] transition-all duration-300 disabled:opacity-50">
+                  {loading ? "Sending..." : "Request Free Site Survey"}
+                </button>
+              </form>
+            )}
           </div>
-
         </div>
       </section>
 
-      {/* 5. CLEAN FOOTER */}
       <footer className="py-8 border-t border-zinc-950 text-center text-xs text-gray-600 bg-black/20">
         <p>&copy; {new Date().getFullYear()} WallPro India. All Rights Reserved.</p>
       </footer>
-
     </main>
   );
 }

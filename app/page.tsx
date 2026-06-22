@@ -6,44 +6,48 @@ import { Printer, Zap, Shield } from 'lucide-react';
 
 export default function Home() {
   return (
-    <main className="bg-grain min-h-screen">
+    <main className="bg-[#030303] text-white min-h-screen">
       {/* NAVIGATION */}
-      <motion.nav 
-        initial={{ y: -100 }} animate={{ y: 0 }}
-        className="fixed top-0 w-full z-50 p-6 flex justify-between items-center backdrop-blur-lg border-b border-white/5"
-      >
-        <span className="text-2xl font-light tracking-[0.2em] uppercase">WallPro<span className="text-[#00a4a6]">India</span></span>
-        <button className="border border-white/20 px-8 py-3 text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">Explore</button>
-      </motion.nav>
+      <nav className="fixed w-full z-50 flex justify-between items-center px-12 py-8 bg-[#030303]/80 backdrop-blur-md">
+        <div className="text-2xl font-light tracking-[0.25em]">WALLPRO<span className="text-[#00a4a6]">INDIA</span></div>
+        <div className="space-x-8 text-[10px] uppercase tracking-[0.2em] text-zinc-400">
+          <a href="#services" className="hover:text-white transition-colors">Services</a>
+          <a href="#contact" className="hover:text-white transition-colors">Enquire</a>
+        </div>
+      </nav>
 
-      {/* HERO: Cinematic Focus */}
-      <section className="h-screen flex flex-col justify-center items-center text-center px-4">
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}>
-          <h1 className="text-5xl md:text-8xl font-bold mb-8">Precision in <br/> Every <span className="text-[#00a4a6]">Print</span></h1>
-          <p className="text-zinc-400 max-w-xl mx-auto text-lg leading-relaxed">The intersection of industrial engineering and digital artistry. We don't just print; we redefine surfaces.</p>
+      {/* HERO: Luxury Minimalism */}
+      <section className="h-screen flex flex-col justify-center items-center text-center px-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <h2 className="text-[#00a4a6] text-xs uppercase tracking-[0.3em] mb-6">Revolutionizing Surfaces</h2>
+          <h1 className="text-6xl md:text-9xl font-bold tracking-tighter leading-[0.9] mb-10">PRECISION<br/>IN PRINT</h1>
+          <p className="text-zinc-500 text-lg max-w-md mx-auto leading-relaxed">
+            Where industrial engineering meets high-end digital artistry. We don't just decorate; we define your space.
+          </p>
         </motion.div>
       </section>
 
-      {/* FEATURES: Layered Cards */}
-      <section className="py-32 px-12 grid md:grid-cols-3 gap-12 bg-[#050505]">
-        {[
-          { icon: Printer, title: "High-Definition 3D", desc: "Razor-sharp textures with industrial precision." },
-          { icon: Zap, title: "Instant UV Curing", desc: "No mess, no odor, immediate finish." },
-          { icon: Shield, title: "Durable Coating", desc: "Engineered for longevity and impact." }
-        ].map((item, i) => (
-          <motion.div 
-            key={i}
-            whileHover={{ y: -10 }}
-            className="p-10 bg-zinc-900/50 border border-white/5 hover:border-[#00a4a6]/50 transition-colors"
-          >
-            <item.icon className="mb-8 text-[#00a4a6]" size={32} />
-            <h3 className="text-xl font-semibold mb-4">{item.title}</h3>
-            <p className="text-zinc-500 leading-relaxed">{item.desc}</p>
-          </motion.div>
-        ))}
+      {/* SERVICES: Modular Luxury Grid */}
+      <section id="services" className="py-32 px-12 border-t border-white/5">
+        <div className="grid md:grid-cols-3 gap-0 border-l border-t border-white/5">
+          {[
+            { icon: Printer, title: "3D VERTICAL", desc: "High-definition architectural printing with deep texture mapping." },
+            { icon: Zap, title: "INSTANT UV", desc: "Industrial-grade rapid curing for odor-free, durable finishes." },
+            { icon: Shield, title: "ENDURANCE", desc: "Scratch-resistant and UV-stable coatings for infinite longevity." }
+          ].map((s, i) => (
+            <div key={i} className="p-12 border-r border-b border-white/5 hover:bg-white/5 transition-colors group">
+              <s.icon className="text-[#00a4a6] mb-8 group-hover:scale-110 transition-transform" size={24} />
+              <h3 className="text-xl font-medium tracking-tight mb-4">{s.title}</h3>
+              <p className="text-zinc-500 text-sm leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
-      
-      {/* Add your Contact Section here... */}
+
+      {/* FOOTER: Final Touch */}
+      <footer className="py-12 text-center text-[10px] uppercase tracking-widest text-zinc-600">
+        © 2026 WallPro India — Architectural Surface Solutions
+      </footer>
     </main>
   );
 }

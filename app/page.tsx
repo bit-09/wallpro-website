@@ -79,9 +79,8 @@ export default function Home() {
       {/* ADDED: h-20 md:h-24 forces the bar to stay sleek and thin */}
       <nav className="absolute top-0 w-full z-50 h-20 md:h-24 px-6 md:px-12 flex justify-between items-center bg-white/80 backdrop-blur-lg border-b border-[#1A1A1A]/10 text-[#1A1A1A]">
         
-        {/* ADDED: overflow-hidden and scale to zoom past the empty space without stretching the bar */}
-        <a href="#top" className="z-50 w-48 md:w-64 h-full flex items-center justify-center overflow-hidden transform transition-transform hover:scale-105 -ml-4">
-          <img src="/logo.png" alt="WallPro India" className="w-full h-full object-contain scale-[2] md:scale-[2.4]" />
+        <a href="#top" className="z-50 flex items-center justify-center h-20 md:h-24">
+          <img src="/logo.png" alt="WallPro India" className="h-full w-auto object-contain" />
         </a>
         
         <div className="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.2em] z-50">
